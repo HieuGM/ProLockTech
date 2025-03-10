@@ -56,7 +56,6 @@ public class HomeController {
                 throw new RuntimeException(ex);
             }
         });
-
         up.setOnAction(e -> showPrevImage());
         down.setOnAction(e -> showNextImage());
     }
