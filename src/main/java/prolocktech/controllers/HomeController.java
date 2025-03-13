@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -32,6 +33,12 @@ public class HomeController {
 
     @FXML
     private Button upload;
+
+    @FXML
+    private Label author;
+
+    @FXML
+    private Label date;
 
     private Stage stage;
 
@@ -72,8 +79,11 @@ public class HomeController {
     // update anh
     private void updateImageView() {
         if (current_index >= 0 && images.size() > current_index) {
+            Img current_img = images.get(current_index);
             Image image = ImageService.decodeBase64ToImage(images.get(current_index).getBase64data());
             img.setImage(image);
+            author.setText("Author: " + current_img.getUploadBy());
+            date.setText("Time: " + current_img.getUploadDate());
         }
     }
     // show anh truoc do
