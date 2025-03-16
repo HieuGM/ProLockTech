@@ -31,8 +31,9 @@
       <AnchorPane prefHeight="73.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="down" layoutX="348.0" layoutY="37.0" mnemonicParsing="false" text="DOWN" />
-            <TextField layoutX="252.0" layoutY="2.0" prefHeight="26.0" prefWidth="245.0" promptText="Send message..." />
-            <Button fx:id="upload" layoutX="560.0" layoutY="2.0" mnemonicParsing="false" text="Upload your image" />
+            <TextField fx:id="rep" layoutX="252.0" layoutY="2.0" prefHeight="26.0" prefWidth="245.0" promptText="Send message..." />
+            <Button fx:id="upload" layoutX="580.0" layoutY="3.0" mnemonicParsing="false" text="Upload your image" />
+            <Button fx:id="send" layoutX="508.0" layoutY="3.0" mnemonicParsing="false" text="Send" />
          </children>
       </AnchorPane>
    </bottom>
