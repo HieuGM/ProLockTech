@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import prolocktech.models.User;
+import prolocktech.services.AuthService;
 import prolocktech.services.UserService;
 
 import java.io.IOException;
@@ -36,6 +37,8 @@ public class LoginController {
     private Stage stage;
 
     private UserService userService = new UserService();
+
+    private AuthService authService = new AuthService();
 
     // khoi tao screen
     public void init(Stage stage) {
@@ -65,6 +68,7 @@ public class LoginController {
         if (userA != null && pass.equals(userA.getPassword())) {
             FXMLLoader fxmlLoader = new FXMLLoader(HomeController.class.getResource("/views/home-screen.fxml"));
             Parent root = fxmlLoader.load();
+            authService.setCurrentUser(userA);
             HomeController controller = fxmlLoader.getController();
             controller.init(stage);
             stage.getScene().setRoot(root);
@@ -80,4 +84,6 @@ public class LoginController {
         controller.init(stage);
         stage.getScene().setRoot(root);
     }
+
+
 }

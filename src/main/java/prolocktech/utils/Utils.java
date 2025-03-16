@@ -9,4 +9,5 @@ public class Utils {
     public static final int H_Image = 359;
     public static final String FILE_PATH = "users.json";
     public static final String FILE_IMAGE = "images.json";
+    public static final String FILE_CHAT = "messages.json";
 }

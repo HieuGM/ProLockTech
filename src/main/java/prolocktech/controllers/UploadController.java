@@ -9,11 +9,14 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import prolocktech.models.Img;
+import prolocktech.services.AuthService;
 import prolocktech.services.ImageService;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
 import static prolocktech.utils.Utils.H_Image;
@@ -32,6 +35,8 @@ public class UploadController {
 
     @FXML
     private Button backtohome;
+
+    private AuthService authService = new AuthService();
 
     private Stage stage;
 
@@ -77,11 +82,15 @@ public class UploadController {
         try {
             byte[] fileContent = Files.readAllBytes(fileImg.toPath());
             String base64Image = Base64.getEncoder().encodeToString(fileContent);
-            ImageService.addImage(new Img(fileImg.getName(), base64Image));
+            ImageService.addImage(new Img(fileImg.getName(), base64Image, authService.getCurrentUser().getUsername(), getCurrentTime()));
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private String getCurrentTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.now().format(formatter);
     }
     // chuyen ve man hinh chinh
     public void BackHome(Stage stage) throws IOException {
