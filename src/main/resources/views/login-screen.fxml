@@ -42,7 +42,7 @@
             </PasswordField>
             <ImageView fitHeight="500.0" fitWidth="339.0" layoutX="-25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Untitled%20design%20(3).png" />
+                  <Image url="@../images/background.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="180.0" fitWidth="205.0" layoutX="440.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">

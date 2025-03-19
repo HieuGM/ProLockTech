@@ -67,6 +67,11 @@ public class SignupController {
         String pass = password.getText();
         User userA = new User(user, pass);
         UserService.addUser(userA);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText("Đăng ký thành công");
+        alert.showAndWait();
         backToLogin(stage);
     }
 

@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #f8f8ff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prolocktech.controllers.HomeController">
+<?import javafx.scene.shape.Rectangle?>
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prolocktech.controllers.HomeController">
    <top>
       <AnchorPane prefHeight="66.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -19,9 +20,9 @@
                   <Image url="@../images/profile.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="message" fitHeight="56.0" fitWidth="112.0" layoutX="660.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="message" fitHeight="56.0" fitWidth="112.0" layoutX="666.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/message.png" />
+                  <Image url="@../images/iconmes.jpg" />
                </image>
             </ImageView>
          </children>
@@ -34,6 +35,7 @@
             <TextField fx:id="rep" layoutX="252.0" layoutY="2.0" prefHeight="26.0" prefWidth="245.0" promptText="Send message..." />
             <Button fx:id="upload" layoutX="580.0" layoutY="3.0" mnemonicParsing="false" text="Upload your image" />
             <Button fx:id="send" layoutX="508.0" layoutY="3.0" mnemonicParsing="false" text="Send" />
+            <Button fx:id="signout" layoutX="28.0" layoutY="3.0" mnemonicParsing="false" text="Sign out" />
          </children>
       </AnchorPane>
    </bottom>
@@ -45,6 +47,7 @@
                <children>
                   <Label fx:id="author" layoutX="140.0" layoutY="323.0" />
                   <Label fx:id="date" layoutX="496.0" layoutY="323.0" />
+                  <Label fx:id="emojiLabel" layoutX="34.0" layoutY="65.0" />
                </children>
             </AnchorPane>
          </children>

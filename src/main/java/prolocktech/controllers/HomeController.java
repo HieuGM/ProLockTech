@@ -2,12 +2,13 @@ package prolocktech.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import prolocktech.models.Img;
 import prolocktech.models.User;
@@ -17,8 +18,14 @@ import prolocktech.services.UserService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+
+import static prolocktech.utils.Utils.EMOJIS;
 
 public class HomeController {
+
+    @FXML
+    private BorderPane mainPane;
 
     @FXML
     private ImageView img;
@@ -50,6 +57,12 @@ public class HomeController {
     @FXML
     private Label date;
 
+    @FXML
+    private Button signout;
+
+    @FXML
+    private Label emojiLabel;
+
     private Stage stage;
 
     private List<Img> images = ImageService.loadImages();
@@ -64,6 +77,8 @@ public class HomeController {
 
     public void init(Stage stage) {
         this.stage = stage;
+
+        img.toFront();
         if (!images.isEmpty()) {
             current_index = 0;
             updateImageView();
@@ -92,6 +107,23 @@ public class HomeController {
                 throw new RuntimeException(ex);
             }
         });
+        signout.setOnAction(e -> {
+            try {
+                signOut();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        img.setPickOnBounds(true);
+        img.setOnMouseClicked(e -> {
+            if (e.getButton() == MouseButton.SECONDARY) {
+                try {
+                    showEmojiMenu();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
     // chuyen sang man hinh upload
@@ -110,6 +142,8 @@ public class HomeController {
             img.setImage(image);
             author.setText("Author: " + current_img.getUploadBy());
             date.setText("Time: " + current_img.getUploadDate());
+            emojiLabel.setText(String.join(" ", current_img.getEmojis()));
+
         }
     }
     // show anh truoc do
@@ -142,5 +176,38 @@ public class HomeController {
     private void replyImage(String mes, String recipient) throws IOException {
         showChatScreen();
         ChatController.replyImage(mes, recipient);
+    }
+
+    private void signOut() throws IOException {
+        authService.signOut();
+        FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/views/login-screen.fxml"));
+        Parent root = loader.load();
+        LoginController controller = loader.getController();
+        controller.init(stage);
+        stage.getScene().setRoot(root);
+    }
+
+    private void showEmojiMenu() throws IOException {
+        ContextMenu emojiMenu = new ContextMenu();
+        for (String emoji : EMOJIS) {
+            MenuItem item = new MenuItem(emoji);
+            item.setOnAction(e -> {
+                try {
+                    addEmojiToImage(emoji);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+            emojiMenu.getItems().add(item);
+        }
+        emojiMenu.show(img, Side.BOTTOM, 0, 0);
+    }
+
+    private void addEmojiToImage(String emoji) throws IOException {
+        if (current_index >= 0 && current_index < images.size()) {
+            Img current_img = images.get(current_index);
+            current_img.addEmoji(emoji);
+            updateImageView();
+        }
     }
 }

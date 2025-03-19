@@ -1,6 +1,9 @@
 package prolocktech.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -13,6 +16,7 @@ import prolocktech.services.AuthService;
 import prolocktech.services.ChatService;
 import prolocktech.services.UserService;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ChatController {
@@ -36,6 +40,9 @@ public class ChatController {
     @FXML
     private TextField input;
 
+    @FXML
+    private Button back;
+
     private UserService userService = new UserService();
 
     private AuthService authService = new AuthService();
@@ -57,6 +64,13 @@ public class ChatController {
         });
 
         send.setOnAction(e -> sendMessage());
+        back.setOnAction(e -> {
+            try {
+                backToHome(stage);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
     private void loadFriends() {
@@ -98,7 +112,16 @@ public class ChatController {
         currentFriend = recipient;
         chatwith.setText("Chat With: " + currentFriend);
         loadChatHistory();
+        ChatService.addMessage(new Message(user, currentFriend, mes));
         Label newMessage = new Label(user + ": " + mes);
         message.getChildren().add(newMessage);
+    }
+
+    private void backToHome(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(HomeController.class.getResource("/views/home-screen.fxml"));
+        Parent root = loader.load();
+        HomeController controller = loader.getController();
+        controller.init(stage);
+        stage.getScene().setRoot(root);
     }
 }

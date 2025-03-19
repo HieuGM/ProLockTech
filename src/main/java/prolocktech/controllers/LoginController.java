@@ -48,7 +48,7 @@ public class LoginController {
             try {
                 loginAction();
             } catch (Exception e1) {
-                throw new RuntimeException();
+                e1.printStackTrace();
             }
         });
         signup.setOnMouseClicked(e -> {
