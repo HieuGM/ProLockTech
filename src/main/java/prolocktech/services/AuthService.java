@@ -11,4 +11,7 @@ public class AuthService {
     public User getCurrentUser() {
         return currentUser;
     }
+    public void signOut() {
+        currentUser = null;
+    }
 }

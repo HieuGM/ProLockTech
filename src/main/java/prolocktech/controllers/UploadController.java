@@ -3,6 +3,7 @@ package prolocktech.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -83,6 +84,11 @@ public class UploadController {
             byte[] fileContent = Files.readAllBytes(fileImg.toPath());
             String base64Image = Base64.getEncoder().encodeToString(fileContent);
             ImageService.addImage(new Img(fileImg.getName(), base64Image, authService.getCurrentUser().getUsername(), getCurrentTime()));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Thông báo");
+            alert.setHeaderText(null);
+            alert.setContentText("Tải ảnh lên thành công!");
+            alert.showAndWait();
         }
         catch (IOException e) {
             e.printStackTrace();
