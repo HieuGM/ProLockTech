@@ -76,6 +76,7 @@ public class ChatController {
     private void loadFriends() {
         List<User> users = userService.getUsers();
         List<String> friends = users.stream().map(User::getUsername).toList();
+//        friends.remove(user);
         list.getItems().setAll(friends);
     }
 

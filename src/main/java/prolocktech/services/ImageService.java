@@ -2,6 +2,7 @@ package prolocktech.services;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import prolocktech.models.Img;
 
@@ -63,5 +64,25 @@ public class ImageService {
     public static Image decodeBase64ToImage(String base64) {
         byte[] imageBytes = Base64.getDecoder().decode(base64);
         return new Image(new ByteArrayInputStream(imageBytes));
+    }
+
+    public void notionToChooseFileWrong() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("Please choose a file");
+        alert.showAndWait();
+    }
+
+    public void notionToChooseFileSuccessful() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText("Tải ảnh lên thành công!");
+        alert.showAndWait();
+    }
+
+    public void showEmojiMenu() {
+
     }
 }

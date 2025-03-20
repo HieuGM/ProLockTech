@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #f8f8ff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prolocktech.controllers.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" stylesheets="@../styles/styles.css" style="-fx-background-color: #f8f8ff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prolocktech.controllers.LoginController">
    <top>
       <AnchorPane prefHeight="274.0" prefWidth="751.0" BorderPane.alignment="CENTER">
          <children>
@@ -51,9 +51,7 @@
                </image>
             </ImageView>
             <Button fx:id="login" layoutX="550.0" layoutY="331.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="107.0" text="LOG IN" textFill="#555555">
-               <effect>
-                  <DropShadow />
-               </effect></Button>
+               </Button>
             <Label fx:id="signup" layoutX="550.0" layoutY="373.0" text="Sign up" textFill="#d7837f" />
             <Label fx:id="forgotpass" layoutX="332.0" layoutY="336.0" text="Forgot your password ?" textFill="#d7837f" />
             <Label fx:id="noti" layoutX="331.0" layoutY="303.0" text="Incorrect username or password!" textFill="#fa0707" />

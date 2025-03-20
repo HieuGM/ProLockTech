@@ -1,7 +1,19 @@
+@font-face {
+    -fx-font-family: "SF Pro Rounded";
+    -fx-src: url("/fonts/SF-Pro-Rounded.ttf");
+}
+
+.label {
+    -fx-font-family: "SF Pro Rounded";
+}
+
+.button {
+    -fx-font-family: "SF Pro Rounded";
+}
+
 #emojiLabel {
     -fx-font-family: "Segoe UI Emoji";
     -fx-font-size: 15px;
-
 }
 
 #mainPane {
@@ -9,37 +21,3 @@
     -fx-background-size: cover;
     -fx-background-position: center;
 }
-
-/*.button {*/
-/*    -fx-background-color: linear-gradient(to bottom, #6ec6ff, #42a5f5); !* Xanh dương pastel *!*/
-/*    -fx-text-fill: white; !* Chữ trắng *!*/
-/*    -fx-font-weight: bold;*/
-/*    -fx-padding: 10px 20px;*/
-/*    -fx-border-radius: 10px;*/
-/*    -fx-background-radius: 10px;*/
-/*    -fx-cursor: hand;*/
-/*    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 5, 0, 3, 3);*/
-/*}*/
-
-/*!* Hover - Hiệu ứng sáng nhẹ *!*/
-/*.button:hover {*/
-/*    -fx-background-color: linear-gradient(to bottom, #81d4fa, #64b5f6);*/
-/*    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 8, 0, 4, 4);*/
-/*}*/
-
-/*!* Khi nhấn *!*/
-/*.button:pressed {*/
-/*    -fx-background-color: linear-gradient(to bottom, #2196f3, #1976d2);*/
-/*    -fx-effect: none;*/
-/*}*/
-
-/*!* Nếu có nút quan trọng (ví dụ: "Đăng xuất"), dùng màu hồng pastel *!*/
-/*#signout {*/
-/*    -fx-background-color: linear-gradient(to bottom, #f48fb1, #f06292);*/
-/*}*/
-
-/*#signout:hover {*/
-/*    -fx-background-color: linear-gradient(to bottom, #f8bbd0, #f48fb1);*/
-/*}*/
-
-
