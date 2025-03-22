@@ -4,14 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" stylesheets="@../styles/styles.css" style="-fx-background-color: #f8f8ff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prolocktech.controllers.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #f8f8ff;" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prolocktech.controllers.LoginController">
    <top>
       <AnchorPane prefHeight="274.0" prefWidth="751.0" BorderPane.alignment="CENTER">
          <children>
@@ -20,22 +19,12 @@
                   <Font size="28.0" />
                </font>
             </Label>
-            <Label layoutX="323.0" layoutY="156.0" text="Username" textFill="#d7837f">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <TextField fx:id="username" layoutX="326.0" layoutY="187.0" prefHeight="30.0" prefWidth="328.0" promptText="Username">
+            <TextField fx:id="username" layoutX="366.0" layoutY="234.0" prefHeight="32.0" prefWidth="328.0" promptText="Username">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label layoutX="326.0" layoutY="235.0" text="Password" textFill="#d7837f">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="userpassword" layoutX="326.0" layoutY="264.0" prefHeight="30.0" prefWidth="332.0" promptText="Password">
+            <PasswordField fx:id="userpassword" layoutX="366.0" layoutY="278.0" prefHeight="32.0" prefWidth="328.0" promptText="Password">
                <font>
                   <Font size="14.0" />
                </font>
@@ -45,18 +34,18 @@
                   <Image url="@../images/background.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="180.0" fitWidth="205.0" layoutX="440.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="227.0" fitWidth="237.0" layoutX="418.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Logo1-removebg-preview.png" />
                </image>
             </ImageView>
-            <Button fx:id="login" layoutX="550.0" layoutY="331.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="107.0" text="LOG IN" textFill="#555555">
+            <Button fx:id="login" layoutX="586.0" layoutY="353.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="107.0" text="LOG IN" textFill="#555555">
                </Button>
-            <Label fx:id="signup" layoutX="550.0" layoutY="373.0" text="Sign up" textFill="#d7837f" />
-            <Label fx:id="forgotpass" layoutX="332.0" layoutY="336.0" text="Forgot your password ?" textFill="#d7837f" />
-            <Label fx:id="noti" layoutX="331.0" layoutY="303.0" text="Incorrect username or password!" textFill="#fa0707" />
-            <Label layoutX="332.0" layoutY="435.0" prefHeight="18.0" prefWidth="86.0" text="- OR -" textFill="#555555" />
-            <Label layoutX="405.0" layoutY="373.0" text="Don't have an account ? " textFill="#555555" />
+            <Label fx:id="signup" layoutX="513.0" layoutY="409.0" text="Sign up" textFill="#d7837f" />
+            <Label fx:id="forgotpass" layoutX="366.0" layoutY="358.0" text="Forgot your password ?" textFill="#d7837f" />
+            <Label fx:id="noti" layoutX="366.0" layoutY="318.0" text="Incorrect username or password!" textFill="#fa0707" />
+            <Label layoutX="332.0" layoutY="455.0" prefHeight="18.0" prefWidth="86.0" text="- OR -" textFill="#555555" />
+            <Label layoutX="366.0" layoutY="409.0" text="Don't have an account ? " textFill="#555555" />
          </children>
       </AnchorPane>
    </top>

@@ -14,11 +14,6 @@
    <top>
       <AnchorPane prefHeight="425.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="246.0" layoutY="45.0" text="Create Account">
-               <font>
-                  <Font size="38.0" />
-               </font>
-            </Label>
             <TextField fx:id="username" layoutX="194.0" layoutY="134.0" prefHeight="26.0" prefWidth="358.0" promptText="Username">
                <font>
                   <Font size="16.0" />
@@ -39,7 +34,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Label layoutX="195.0" layoutY="343.0" text="Already have an account ?">
+            <Label layoutX="197.0" layoutY="343.0" text="Already have an account ?">
                <font>
                   <Font size="15.0" />
                </font>
@@ -51,8 +46,8 @@
             </Label>
             <MenuButton fx:id="language" layoutX="638.0" layoutY="14.0" mnemonicParsing="false" text="English">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
+                <MenuItem mnemonicParsing="false" text="Vietnamese" />
+                <MenuItem mnemonicParsing="false" text="..." />
               </items>
             </MenuButton>
          </children>

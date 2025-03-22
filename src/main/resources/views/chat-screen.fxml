@@ -20,13 +20,13 @@
       <ListView fx:id="list" layoutX="24.0" layoutY="53.0" prefHeight="412.0" prefWidth="121.0" />
       <Label layoutX="24.0" layoutY="23.0" prefHeight="18.0" prefWidth="122.0" text="Message" />
       <Label fx:id="chatwith" layoutX="174.0" layoutY="33.0" />
-      <ScrollPane layoutX="174.0" layoutY="53.0" prefHeight="380.0" prefWidth="538.0">
+      <ScrollPane layoutX="174.0" layoutY="53.0" prefHeight="380.0" prefWidth="538.0" fitToWidth="true">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="379.0" prefWidth="538.0">
-               <children>
-                  <VBox fx:id="message" prefHeight="380.0" prefWidth="538.0" />
-               </children>
-            </AnchorPane>
+<!--          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="379.0" prefWidth="538.0">-->
+<!--               <children>-->
+                  <VBox fx:id="message" prefWidth="538.0" />
+<!--               </children>-->
+<!--            </AnchorPane>-->
         </content>
       </ScrollPane>
       <Button fx:id="back" layoutX="621.0" layoutY="10.0" mnemonicParsing="false" text="Back to Home" />

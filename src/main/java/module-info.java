@@ -8,4 +8,5 @@ module prolocktech {
     opens prolocktech.controllers to javafx.fxml;
     exports prolocktech;
     exports prolocktech.controllers;
+    opens prolocktech.client to com.google.gson;
 }
