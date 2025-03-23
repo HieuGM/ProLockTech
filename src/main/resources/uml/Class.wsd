@@ -1,0 +1,271 @@
+@startuml
+package controllers {
+    class HomeController {
+    - BorderPane mainPane
+    - ImageView img
+    - ImageView message
+    - Button send
+    - ImageView profile
+    - TextField rep
+    - Button up
+    - Button down
+    - Button upload
+    - Label author
+    - Label date
+    - Button signout
+    - Label emojiLabel
+    - VBox emojiContainer
+    - Stage stage
+    - List<Img> images
+    - AuthService authService
+    - int current_index
+
+    + HomeController() throws IOException
+    + init(stage: Stage): void
+    - UploadImage(stage: Stage): void
+    - updateImageView(): void
+    - showPrevImage(): void
+    - showNextImage(): void
+    - showChatScreen(): void
+    - reply(): void
+    - replyImage(mes: String, recipient: String): void
+    - signOut(): void
+    - showEmojiMenu(): void
+    - addEmojiToImage(emoji: String): void
+}
+
+class ChatController {
+    - static ChatController instance
+    - Label chatwith
+    - VBox message
+    - Button send
+    - Stage stage
+    - ListView<String> list
+    - TextField input
+    - Button back
+    - UserService userService
+    - AuthService authService
+    - ChatClient chatClient
+    - String currentFriend
+    - String user
+
+    + ChatController() throws IOException
+    + init(stage: Stage): void
+    - loadFriends(): void
+    - openChatWith(friend: String): void
+    + sendMessage(): void
+    - loadChatHistory(): void
+    + static replyImage(mes: String, recipient: String): void
+    - receiveReply(mes: String, recipient: String): void
+    - backToHome(stage: Stage): void
+    + receiveMessage(mes: String): void
+}
+
+class LoginController {
+    - Label forgotpass
+    - Button login
+    - Label noti
+    - Label signup
+    - TextField username
+    - PasswordField userpassword
+    - Stage stage
+    - UserService userService
+    - AuthService authService
+
+    + init(stage: Stage): void
+    - loginAction(): void
+    - signupAction(): void
+}
+
+class SignupController {
+    - Button create
+    - TextField email
+    - Label login
+    - PasswordField password
+    - TextField username
+    - MenuButton language
+    - Stage stage
+
+    + init(stage: Stage): void
+    - isValidEmail(email: String): boolean
+    + createAccount(): void
+    + backToLogin(stage: Stage): void
+}
+
+class UploadController {
+    - ImageView image
+    - Button upload
+    - Button chooseFile
+    - Button backtohome
+    - AuthService authService
+    - ImageService imageService
+    - Stage stage
+    - File fileImg
+
+    + init(stage: Stage): void
+    - fileChooserEvent(stage: Stage): File
+    + ChooseImage(stage: Stage): void
+    + UploadImage(stage: Stage): void
+    - getCurrentTime(): String
+    + BackHome(stage: Stage): void
+}
+}
+
+package models {
+    class Img {
+    - String fileName
+    - String base64data
+    - String uploadBy
+    - String uploadDate
+    - List<String> emojis
+
+    + Img(fileName: String, base64data: String, uploadBy: String, uploadDate: String, emojis: List<String>)
+    + void addEmoji(emoji: String)
+    + List<Image> getEmojisImage(): List<Image>
+    + List<String> getEmojis(): List<String>
+    + String getUploadBy(): String
+    + String getUploadDate(): String
+    + String getBase64data(): String
+}
+
+class Message {
+    - String sender
+    - String receiver
+    - String content
+
+    + Message(sender: String, receiver: String, content: String)
+    + String getSender()
+    + String getReceiver()
+    + String getContent()
+}
+
+class User {
+    - String username
+    - String password
+
+    + User(username: String, password: String)
+    + String getUsername()
+    + String getPassword()
+}
+
+}
+
+package service {
+    class AuthService {
+    - static User currentUser
+
+    + void setCurrentUser(user: User)
+    + User getCurrentUser()
+    + void signOut()
+}
+
+class ChatServer {
+    - static Map<String, ClientHandler> clients
+    + static void broadcast(String, String, String)
+    + static void removeClient(ClientHandler)
+}
+
+class ClientHandler {
+        - Socket socket
+        - PrintWriter out
+        - BufferedReader in
+        - String username
+        + run()
+        + sendMessage(String)
+        + closeConnection()
+}
+
+class ChatService {
+    - static List<Message> messages
+    - static List<Message> loadMessages(): List<Message>
+    - static void saveMessages(List<Message>)
+    + static void addMessage(Message)
+    + static List<Message> getMessages(String, String)
+}
+
+class ImageService {
+    - static Gson gson
+    - static List<Img> images
+    + static List<Img> loadImages()
+    + static void saveImage(List<Img>)
+    + static void addImage(Img)
+    + static Image decodeBase64ToImage(String)
+    + void notionToChooseFileWrong()
+    + void notionToChooseFileSuccessful()
+}
+
+class UserService {
+    - static List<User> users
+    - static void saveUsers(List<User>)
+    - static List<User> loadUsers()
+    + List<User> getUsers()
+    + static void addUser(User)
+    + User findUsername(String)
+}
+}
+
+package client {
+    class ChatClient {
+    - Socket socket
+    - BufferedReader input
+    - BufferedWriter output
+    - String username
+    - ChatController chatController
+    + ChatClient(String serverAddress, int port, String username, ChatController chatController)
+    + ChatClient()
+    - void receiveMessages()
+    + void sendMessage(String recipient, String message)
+    - void closeConnection()
+}
+}
+
+package utils {
+    class Utils {
+    {static} Color TEXT_COLOR = Color.web("#F8F5F2");
+    {static} Color BACKGROUND_COLOR = Color.web("#B69E92");
+    {static} int W_Image = 588;
+    {static} int H_Image = 359;
+    {static} String FILE_PATH = "data/users.json";
+    {static} String FILE_IMAGE = "data/images.json";
+    {static} String FILE_CHAT = "data/messages.json";
+    {static} Image[] EMOJIS;
+    {static} String[] EMOJIS_URL;
+}
+}
+
+class Main {
+    +start(Stage stage) : void
+    +main(String[] args) : void
+    -isPortInUse(int port) : boolean
+}
+
+HomeController --> ChatController
+HomeController --> ImageService
+HomeController --> AuthService
+UploadController --> ImageService
+UploadController --> AuthService
+UploadController --> HomeController
+SignupController --> AuthService
+SignupController --> UserService
+SignupController --> LoginController
+LoginController --> AuthService
+LoginController --> UserService
+LoginController --> SignupController
+ChatController --> ChatService
+ChatController --> ChatClient
+ChatServer *-- ClientHandler
+ChatServer --> ChatService
+ChatServer --> AuthService
+ChatClient --> ChatServer
+ChatClient --> ChatController
+ClientHandler --> ChatServer
+ChatService --> Message
+UserService --> User
+AuthService --> User
+ImageService --> Img
+ChatClient --> Message
+User *-- Message
+Main --> LoginController
+Main --> SignupController
+Main --> HomeController
+@enduml

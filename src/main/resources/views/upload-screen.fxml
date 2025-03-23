@@ -4,29 +4,37 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prolocktech.controllers.UploadController">
-   <top>
-      <AnchorPane prefHeight="482.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+<?import javafx.scene.layout.VBox?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prolocktech.controllers.UploadController">
+   <bottom>
+      <AnchorPane prefHeight="111.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="upload" layoutX="340.0" layoutY="436.0" mnemonicParsing="false" text="Upload">
+            <Button fx:id="upload" layoutX="329.0" layoutY="57.0" mnemonicParsing="false" text="Upload">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <ImageView fx:id="image" fitHeight="359.0" fitWidth="588.0" layoutX="81.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="chooseFile" layoutX="74.0" layoutY="436.0" mnemonicParsing="false" text="Choose file">
+            <Button fx:id="chooseFile" layoutX="58.0" layoutY="57.0" mnemonicParsing="false" text="Choose file">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="backtohome" layoutX="554.0" layoutY="436.0" mnemonicParsing="false" text="Back to Home">
+            <Button fx:id="backtohome" layoutX="549.0" layoutY="57.0" mnemonicParsing="false" text="Back to Home">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-   </top>
+   </bottom>
+   <center>
+      <VBox alignment="CENTER">
+         <children>
+            <ImageView fx:id="image" fitHeight="303.0" fitWidth="492.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
+   </center>
 </BorderPane>

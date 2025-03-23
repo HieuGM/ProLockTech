@@ -1,0 +1,44 @@
+start
+
+:Start Application;
+:Show Login Screen;
+if (User has account?) then (Yes)
+    :Enter Credentials;
+    if (Login Successful?) then (Yes)
+        :Navigate to Home Screen;
+    else (No)
+        :Show Error Message;
+        :Retry Login;
+        stop
+    endif
+else (No)
+    :Navigate to Signup Screen;
+    :Enter Signup Details;
+    if (Signup Successful?) then (Yes)
+        :Navigate to Home Screen;
+    else (No)
+        :Show Signup Error;
+        stop
+    endif
+endif
+
+while (User is in Home Screen) 
+    :View Images;
+    :Chat with Friends;
+    if (Upload Image?) then (Yes)
+        :Select Image;
+        :Upload Image;
+        :Show Success Message;
+    endif
+    if (Send Message?) then (Yes)
+        :Enter Message;
+        :Send Message via ChatServer;
+    endif
+    if (Sign Out?) then (Yes)
+        :Logout;
+        :Return to Login Screen;
+        stop
+    endif
+endwhile
+
+stop

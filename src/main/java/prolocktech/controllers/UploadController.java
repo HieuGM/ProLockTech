@@ -3,17 +3,22 @@ package prolocktech.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import prolocktech.models.Img;
+import prolocktech.services.AuthService;
 import prolocktech.services.ImageService;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Base64;
 
 import static prolocktech.utils.Utils.H_Image;
@@ -33,6 +38,10 @@ public class UploadController {
     @FXML
     private Button backtohome;
 
+    private AuthService authService = new AuthService();
+
+    private ImageService imageService = new ImageService();
+
     private Stage stage;
 
     private File fileImg;
@@ -47,6 +56,7 @@ public class UploadController {
                 throw new RuntimeException(ex);
             }
         });
+        image.setPreserveRatio(true);
         backtohome.setOnAction(e -> {
             try {
                 BackHome(stage);
@@ -75,13 +85,24 @@ public class UploadController {
     // upload anh len
     public void UploadImage(Stage stage) throws IOException {
         try {
+            if (fileImg == null) {
+                imageService.notionToChooseFileWrong();
+                return;
+            }
             byte[] fileContent = Files.readAllBytes(fileImg.toPath());
             String base64Image = Base64.getEncoder().encodeToString(fileContent);
-            ImageService.addImage(new Img(fileImg.getName(), base64Image));
+            Img newImg = new Img(fileImg.getName(), base64Image, authService.getCurrentUser().getUsername(), getCurrentTime(), new ArrayList<>());
+            ImageService.addImage(newImg);
+            ImageService.saveImage(imageService.getImages());
+            imageService.notionToChooseFileSuccessful();
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private String getCurrentTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.now().format(formatter);
     }
     // chuyen ve man hinh chinh
     public void BackHome(Stage stage) throws IOException {

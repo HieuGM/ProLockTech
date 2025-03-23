@@ -9,7 +9,6 @@ import prolocktech.models.User;
 import prolocktech.services.UserService;
 
 import java.io.IOException;
-import java.util.List;
 
 public class SignupController {
 
@@ -49,13 +48,30 @@ public class SignupController {
                 throw new RuntimeException(e);
             }
         });
+        email.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!isValidEmail(newValue)) {
+                email.setStyle("-fx-text-fill: red;");
+            }
+            else {
+                email.setStyle("-fx-text-fill: gray;");
+            }
+        });
     }
 
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        return email.matches(emailRegex);
+    }
     public void createAccount() throws IOException {
         String user = username.getText();
         String pass = password.getText();
         User userA = new User(user, pass);
         UserService.addUser(userA);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Thông báo");
+        alert.setHeaderText(null);
+        alert.setContentText("Đăng ký thành công");
+        alert.showAndWait();
         backToLogin(stage);
     }
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prolocktech.controllers.ChatController">
+   <children>
+      <HBox layoutX="173.0" layoutY="441.0" prefHeight="46.0" prefWidth="538.0">
+         <children>
+            <TextField fx:id="input" prefHeight="26.0" prefWidth="469.0" />
+            <Button fx:id="send" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="Send" />
+         </children>
+      </HBox>
+      <ListView fx:id="list" layoutX="24.0" layoutY="53.0" prefHeight="412.0" prefWidth="121.0" />
+      <Label layoutX="24.0" layoutY="23.0" prefHeight="18.0" prefWidth="122.0" text="Message" />
+      <Label fx:id="chatwith" layoutX="174.0" layoutY="33.0" />
+      <ScrollPane layoutX="174.0" layoutY="53.0" prefHeight="380.0" prefWidth="538.0" fitToWidth="true">
+        <content>
+<!--          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="379.0" prefWidth="538.0">-->
+<!--               <children>-->
+                  <VBox fx:id="message" prefWidth="538.0" />
+<!--               </children>-->
+<!--            </AnchorPane>-->
+        </content>
+      </ScrollPane>
+      <Button fx:id="back" layoutX="621.0" layoutY="10.0" mnemonicParsing="false" text="Back to Home" />
+   </children>
+</AnchorPane>
