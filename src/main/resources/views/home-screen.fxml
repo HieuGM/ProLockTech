@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.shape.Rectangle?>
 <BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prolocktech.controllers.HomeController">
    <top>
       <AnchorPane prefHeight="66.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="up" layoutX="350.0" layoutY="27.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="UP" />
+            <Button fx:id="up" layoutX="350.0" layoutY="31.0" mnemonicParsing="false" prefHeight="3.0" prefWidth="50.0" text="UP" />
             <ImageView fx:id="profile" fitHeight="49.0" fitWidth="94.0" layoutX="28.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/profile.png" />
@@ -48,6 +48,7 @@
                   <Label fx:id="author" layoutX="140.0" layoutY="323.0" />
                   <Label fx:id="date" layoutX="496.0" layoutY="323.0" />
                   <Label fx:id="emojiLabel" layoutX="34.0" layoutY="65.0" />
+                  <VBox fx:id="emojiContainer" layoutX="27.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" />
                </children>
             </AnchorPane>
          </children>

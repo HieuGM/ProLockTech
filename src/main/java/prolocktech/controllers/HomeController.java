@@ -9,6 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import prolocktech.models.Img;
 import prolocktech.models.User;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static prolocktech.utils.Utils.EMOJIS;
+import static prolocktech.utils.Utils.EMOJIS_URL;
 
 public class HomeController {
 
@@ -62,6 +65,9 @@ public class HomeController {
 
     @FXML
     private Label emojiLabel;
+
+    @FXML
+    private VBox emojiContainer;
 
     private Stage stage;
 
@@ -142,7 +148,13 @@ public class HomeController {
             img.setImage(image);
             author.setText("Author: " + current_img.getUploadBy());
             date.setText("Time: " + current_img.getUploadDate());
-            emojiLabel.setText(String.join(" ", current_img.getEmojis()));
+            emojiContainer.getChildren().clear();
+            for (Image emoji : current_img.getEmojisImage()) {
+                ImageView emojiView = new ImageView(emoji);
+                emojiView.setFitHeight(20);
+                emojiView.setFitWidth(20);
+                emojiContainer.getChildren().add(emojiView);
+            }
 
         }
     }
@@ -189,11 +201,16 @@ public class HomeController {
 
     private void showEmojiMenu() throws IOException {
         ContextMenu emojiMenu = new ContextMenu();
-        for (String emoji : EMOJIS) {
-            MenuItem item = new MenuItem(emoji);
+        for (String emojiURL : EMOJIS_URL) {
+            MenuItem item = new MenuItem();
+            Image emojiImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(emojiURL)));
+            ImageView emojiView = new ImageView(emojiImage);
+            emojiView.setFitWidth(20);
+            emojiView.setFitHeight(20);
+            item.setGraphic(emojiView);
             item.setOnAction(e -> {
                 try {
-                    addEmojiToImage(emoji);
+                    addEmojiToImage(emojiURL);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -207,6 +224,7 @@ public class HomeController {
         if (current_index >= 0 && current_index < images.size()) {
             Img current_img = images.get(current_index);
             current_img.addEmoji(emoji);
+            ImageService.saveImage(images);
             updateImageView();
         }
     }

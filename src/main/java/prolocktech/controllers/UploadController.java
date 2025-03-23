@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Base64;
 
 import static prolocktech.utils.Utils.H_Image;
@@ -39,6 +40,8 @@ public class UploadController {
 
     private AuthService authService = new AuthService();
 
+    private ImageService imageService = new ImageService();
+
     private Stage stage;
 
     private File fileImg;
@@ -53,6 +56,7 @@ public class UploadController {
                 throw new RuntimeException(ex);
             }
         });
+        image.setPreserveRatio(true);
         backtohome.setOnAction(e -> {
             try {
                 BackHome(stage);
@@ -81,14 +85,16 @@ public class UploadController {
     // upload anh len
     public void UploadImage(Stage stage) throws IOException {
         try {
+            if (fileImg == null) {
+                imageService.notionToChooseFileWrong();
+                return;
+            }
             byte[] fileContent = Files.readAllBytes(fileImg.toPath());
             String base64Image = Base64.getEncoder().encodeToString(fileContent);
-            ImageService.addImage(new Img(fileImg.getName(), base64Image, authService.getCurrentUser().getUsername(), getCurrentTime()));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Thông báo");
-            alert.setHeaderText(null);
-            alert.setContentText("Tải ảnh lên thành công!");
-            alert.showAndWait();
+            Img newImg = new Img(fileImg.getName(), base64Image, authService.getCurrentUser().getUsername(), getCurrentTime(), new ArrayList<>());
+            ImageService.addImage(newImg);
+            ImageService.saveImage(imageService.getImages());
+            imageService.notionToChooseFileSuccessful();
         }
         catch (IOException e) {
             e.printStackTrace();

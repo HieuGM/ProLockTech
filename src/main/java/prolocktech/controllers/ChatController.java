@@ -1,5 +1,6 @@
 package prolocktech.controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import prolocktech.client.ChatClient;
 import prolocktech.models.Message;
 import prolocktech.models.User;
 import prolocktech.services.AuthService;
@@ -47,15 +49,18 @@ public class ChatController {
 
     private AuthService authService = new AuthService();
 
+    private ChatClient chatClient;
+
     private String currentFriend;
 
     String user;
 
-    public ChatController() {
+    public ChatController() throws IOException {
         instance = this;
     }
-    public void init(Stage stage) {
+    public void init(Stage stage) throws IOException {
         this.user = authService.getCurrentUser() != null ? authService.getCurrentUser().getUsername() : "Unknown";
+        chatClient = new ChatClient("localhost", 12345, user, this);
         loadFriends();
         list.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !list.getItems().isEmpty()) {
@@ -63,7 +68,13 @@ public class ChatController {
             }
         });
 
-        send.setOnAction(e -> sendMessage());
+        send.setOnAction(e -> {
+            try {
+                sendMessage();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         back.setOnAction(e -> {
             try {
                 backToHome(stage);
@@ -76,6 +87,7 @@ public class ChatController {
     private void loadFriends() {
         List<User> users = userService.getUsers();
         List<String> friends = users.stream().map(User::getUsername).toList();
+//        friends.remove(user);
         list.getItems().setAll(friends);
     }
 
@@ -86,9 +98,14 @@ public class ChatController {
         loadChatHistory();
     }
 
-    private void sendMessage() {
+    public void sendMessage() throws IOException {
         if (currentFriend != null && !input.getText().isEmpty()) {
             ChatService.addMessage(new Message(user, currentFriend, input.getText()));
+//            Label newMessage = new Label(user + ": " + input.getText());
+//            message.getChildren().add(newMessage);
+//            input.clear();
+//            String text = input.getText();
+            chatClient.sendMessage(currentFriend, input.getText());
             Label newMessage = new Label(user + ": " + input.getText());
             message.getChildren().add(newMessage);
             input.clear();
@@ -102,17 +119,18 @@ public class ChatController {
             message.getChildren().add(new Label(m.getSender() + ": " + m.getContent()));
         }
     }
-    public static void replyImage(String mes, String recipient) {
+    public static void replyImage(String mes, String recipient) throws IOException {
         if (instance != null) {
             instance.receiveReply(mes, recipient);
         }
     }
 
-    private void receiveReply(String mes, String recipient) {
+    private void receiveReply(String mes, String recipient) throws IOException {
         currentFriend = recipient;
         chatwith.setText("Chat With: " + currentFriend);
         loadChatHistory();
         ChatService.addMessage(new Message(user, currentFriend, mes));
+        chatClient.sendMessage(currentFriend, mes);
         Label newMessage = new Label(user + ": " + mes);
         message.getChildren().add(newMessage);
     }
@@ -123,5 +141,19 @@ public class ChatController {
         HomeController controller = loader.getController();
         controller.init(stage);
         stage.getScene().setRoot(root);
+    }
+
+    public void receiveMessage(String mes) {
+        Platform.runLater(() -> {
+            String[] parts = mes.split(": ", 2);
+            if (parts.length == 2) {
+                String sender = parts[0];
+                String content = parts[1];
+                if (sender.equals(currentFriend)) {
+                    message.getChildren().add(new Label(mes));
+                }
+                ChatService.addMessage(new Message(parts[0], user, parts[1]));
+            }
+        });
     }
 }

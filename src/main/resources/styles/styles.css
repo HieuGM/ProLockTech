@@ -1,7 +1,55 @@
+@font-face {
+    -fx-font-family: "SF Pro Rounded";
+    -fx-src: url("/fonts/SF-Pro-Rounded.ttf");
+}
+
+.label {
+    -fx-font-family: "SF Pro Rounded";
+}
+
+.button {
+    -fx-padding: 5px 10px;
+    -fx-border-width: 0;
+    -fx-border-radius: 50px;
+    -fx-background-color: linear-gradient(to right, #f582a7, #d39eff, #8ee6ff);
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 10, 0, 2, 2);
+    -fx-transition: all 0.2s;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to right, #f582a7, #d39eff, #8ee6ff);
+    -fx-text-fill: rgb(33, 0, 85);
+}
+
+.button:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+.text-field {
+    -fx-border-width: 0px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #e1e2e3;
+    -fx-padding: 0.5em 1em;
+    -fx-font-size: 13px;
+    -fx-effect: innershadow(three-pass-box, rgba(0, 0, 0, 0.2), 3, 0, 2, 2);
+}
+
+.label {
+    -fx-font-size: 14px;
+}
+
+.sup {
+    -fx-text-fill: red;
+}
+
 #emojiLabel {
     -fx-font-family: "Segoe UI Emoji";
     -fx-font-size: 15px;
-
 }
 
 #mainPane {
@@ -9,37 +57,3 @@
     -fx-background-size: cover;
     -fx-background-position: center;
 }
-
-/*.button {*/
-/*    -fx-background-color: linear-gradient(to bottom, #6ec6ff, #42a5f5); !* Xanh dương pastel *!*/
-/*    -fx-text-fill: white; !* Chữ trắng *!*/
-/*    -fx-font-weight: bold;*/
-/*    -fx-padding: 10px 20px;*/
-/*    -fx-border-radius: 10px;*/
-/*    -fx-background-radius: 10px;*/
-/*    -fx-cursor: hand;*/
-/*    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 5, 0, 3, 3);*/
-/*}*/
-
-/*!* Hover - Hiệu ứng sáng nhẹ *!*/
-/*.button:hover {*/
-/*    -fx-background-color: linear-gradient(to bottom, #81d4fa, #64b5f6);*/
-/*    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 8, 0, 4, 4);*/
-/*}*/
-
-/*!* Khi nhấn *!*/
-/*.button:pressed {*/
-/*    -fx-background-color: linear-gradient(to bottom, #2196f3, #1976d2);*/
-/*    -fx-effect: none;*/
-/*}*/
-
-/*!* Nếu có nút quan trọng (ví dụ: "Đăng xuất"), dùng màu hồng pastel *!*/
-/*#signout {*/
-/*    -fx-background-color: linear-gradient(to bottom, #f48fb1, #f06292);*/
-/*}*/
-
-/*#signout:hover {*/
-/*    -fx-background-color: linear-gradient(to bottom, #f8bbd0, #f48fb1);*/
-/*}*/
-
-
