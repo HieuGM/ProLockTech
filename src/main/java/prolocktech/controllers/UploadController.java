@@ -56,6 +56,7 @@ public class UploadController {
                 throw new RuntimeException(ex);
             }
         });
+        image.setPreserveRatio(true);
         backtohome.setOnAction(e -> {
             try {
                 BackHome(stage);

@@ -46,8 +46,8 @@ public class ChatServer {
         }
     }
 
-    public static void removeClient(ClientHandler client) {
-        clients.remove(client);
+    public static void removeClient(String username) {
+        clients.remove(username);
     }
 
      static class ClientHandler implements Runnable {
@@ -92,7 +92,7 @@ public class ChatServer {
         private void closeConnection() {
             try {
                 socket.close();
-                ChatServer.removeClient(this);
+                ChatServer.removeClient(username);
             } catch (IOException e) {
                 e.printStackTrace();
             }
